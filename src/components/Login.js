@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Navigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../action/auth';
 
 const Login = (props) => {
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth);
+  const { isAuthenticated } = useSelector((state) => state.auth);
 
   const [user, setUser] = useState({
     email: '',
@@ -20,9 +20,13 @@ const Login = (props) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(email, password);
     dispatch(login(email, password));
+    // login(email,password)    // wrong
   };
+
+  if (isAuthenticated) {
+    return <Navigate to="/" replace={true} />;
+  }
 
   return (
     <div className="form-container">
@@ -58,6 +62,10 @@ const Login = (props) => {
           className="btn btn-primary btn-block"
         />
       </form>
+
+      <p className="my-1">
+        Don't have an account? <Link to="/register">Sign Up</Link>
+      </p>
     </div>
   );
 };

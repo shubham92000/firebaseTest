@@ -16,15 +16,20 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   ACCOUNT_DELETE,
-  CLEAR_PROFILE,
+  LOAD_USER,
 } from './types';
+
+export const loading = () => async (dispatch) => {
+  dispatch({
+    type: LOAD_USER,
+  });
+};
 
 // load user
 export const loadUser = () => async (dispatch) => {
   const auth = getAuth(app);
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      console.log(user);
       dispatch({
         type: USER_LOADED,
         payload: user,
@@ -83,7 +88,7 @@ export const login = (email, password) => async (dispatch) => {
 export const logout = () => async (dispatch) => {
   const auth = getAuth(app);
   try {
-    await signOut();
+    await signOut(auth);
     dispatch({
       type: LOGOUT,
     });
