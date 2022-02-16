@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Navigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../action/auth';
+import Loading from './Loading';
 
 const Login = (props) => {
   const dispatch = useDispatch();
-  const { isAuthenticated } = useSelector((state) => state.auth);
+  const { isAuthenticated, loading } = useSelector((state) => state.auth);
 
   const [user, setUser] = useState({
     email: '',
@@ -27,6 +28,10 @@ const Login = (props) => {
       password: '',
     });
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   if (isAuthenticated) {
     return <Navigate to="/" replace={true} />;
