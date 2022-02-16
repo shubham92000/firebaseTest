@@ -1,27 +1,40 @@
 import React, { useEffect } from 'react';
-import { auth } from '../firebase/config';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { app } from '../firebase/config';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 
 const Home = () => {
-  const email = 'shubham@gmail.com';
-  const password = '12345678';
+  const auth = getAuth(app);
 
-  useEffect(() => {
-    // createUserWithEmailAndPassword(auth, email, password)
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-      });
-  }, []);
+  // useEffect(() => {
+  //   onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       const uid = user.uid;
+  //       console.log(uid);
+  //       console.log(user);
+  //     } else {
+  //       console.log('no user');
+  //     }
+  //   });
+  // }, []);
+
+  // useEffect(() => {
+  // createUserWithEmailAndPassword(auth, email, password)
+  // signInWithEmailAndPassword(auth, email, password)
+  //   .then((userCredential) => {
+  //     const user = userCredential.user;
+  //     console.log(user);
+  //   })
+  //   .catch((error) => {
+  //     const errorCode = error.code;
+  //     const errorMessage = error.message;
+  //     console.log(errorCode, errorMessage);
+  //   });
+
+  // }, []);
   return <div>Home</div>;
 };
 

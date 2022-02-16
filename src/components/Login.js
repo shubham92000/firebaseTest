@@ -2,15 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Login = (props) => {
-  let navigate = useNavigate();
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     navigate('/', { replace: True });
-  //   }
-
-  //   // eslint-disable-next-line
-  // }, [isAuthenticated, props]);
-
   const [user, setUser] = useState({
     email: '',
     password: '',
@@ -23,6 +14,7 @@ const Login = (props) => {
   };
 
   const onSubmit = (e) => {
+    e.preventDefault();
     console.log(email, password);
   };
 
