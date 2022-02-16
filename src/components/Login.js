@@ -22,6 +22,10 @@ const Login = (props) => {
     e.preventDefault();
     dispatch(login(email, password));
     // login(email,password)    // wrong
+    setUser({
+      email: '',
+      password: '',
+    });
   };
 
   if (isAuthenticated) {

@@ -41,7 +41,14 @@ function authReducer(state = initialState, action) {
         isAuthenticated: true,
         loading: false,
       };
-
+    case ACCOUNT_DELETE:
+      return {
+        ...state,
+        user: null,
+        isAuthenticated: false,
+        loading: false,
+        error: null,
+      };
     case AUTH_ERROR:
     case REGISTER_FAIL:
     case LOGIN_FAIL:

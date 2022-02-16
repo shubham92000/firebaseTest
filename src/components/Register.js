@@ -22,6 +22,10 @@ const Register = (props) => {
     e.preventDefault();
     dispatch(register(email, password));
     // register(email,password)    // wrong
+    setUser({
+      email: '',
+      password: '',
+    });
   };
 
   if (isAuthenticated) {

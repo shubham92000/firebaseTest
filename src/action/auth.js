@@ -5,6 +5,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  deleteUser,
 } from 'firebase/auth';
 
 import {
@@ -94,5 +95,19 @@ export const logout = () => async (dispatch) => {
     });
   } catch (error) {
     console.log('log out error');
+  }
+};
+
+export const deleteAccount = () => async (dispatch) => {
+  const auth = getAuth(app);
+  const user = auth.currentUser;
+
+  try {
+    await deleteUser(user);
+    dispatch({
+      type: ACCOUNT_DELETE,
+    });
+  } catch (error) {
+    console.log('could not delete account');
   }
 };

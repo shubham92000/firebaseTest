@@ -1,19 +1,27 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { logout } from '../action/auth';
+import { logout, deleteAccount } from '../action/auth';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const onSubmit = (e) => {
+  const onSubmitLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
+  };
+
+  const onSubmitDeleteAccount = (e) => {
+    e.preventDefault();
+    dispatch(deleteAccount());
   };
 
   return (
     <>
       Home
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmitLogout}>
         <input type="submit" value="Logout" />
+      </form>
+      <form onSubmit={onSubmitDeleteAccount}>
+        <input type="submit" value="Delete Account" />
       </form>
     </>
   );
