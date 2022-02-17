@@ -6,6 +6,8 @@ import {
   signInWithEmailAndPassword,
   signOut,
   deleteUser,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from 'firebase/auth';
 
 import {
@@ -18,6 +20,8 @@ import {
   LOGOUT,
   ACCOUNT_DELETE,
   LOAD_USER,
+  GOOGLE_LOGIN_SUCCESS,
+  GOOGLE_LOGIN_FAIL,
 } from './types';
 
 export const loading = () => async (dispatch) => {
@@ -110,4 +114,42 @@ export const deleteAccount = () => async (dispatch) => {
   } catch (error) {
     console.log('could not delete account');
   }
+};
+
+export const googleLogin = () => async (dispatch) => {
+  const provider = new GoogleAuthProvider();
+  const auth = getAuth(app);
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      // The signed-in user info.
+      const user = result.user;
+      console.log(token, user);
+      dispatch({
+        type: GOOGLE_LOGIN_SUCCESS,
+        payload: user,
+      });
+    })
+    .catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.email;
+      // The AuthCredential type that was used.
+      const credential = GoogleAuthProvider.credentialFromError(error);
+
+      console.log(errorCode, errorMessage, email, credential);
+      dispatch({
+        type: GOOGLE_LOGIN_FAIL,
+        payload: {
+          errorCode,
+          errorMessage,
+          email,
+          credential,
+        },
+      });
+    });
 };

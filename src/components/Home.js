@@ -7,6 +7,7 @@ import Loading from './Loading';
 const Home = () => {
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.auth);
+
   const onSubmitLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
@@ -24,12 +25,8 @@ const Home = () => {
   return (
     <>
       Home
-      <form onSubmit={onSubmitLogout}>
-        <input type="submit" value="Logout" />
-      </form>
-      <form onSubmit={onSubmitDeleteAccount}>
-        <input type="submit" value="Delete Account" />
-      </form>
+      <button onClick={onSubmitLogout}>Log Out</button>
+      <button onClick={onSubmitDeleteAccount}>Delete Account</button>
     </>
   );
 };

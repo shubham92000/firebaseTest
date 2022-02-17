@@ -8,6 +8,8 @@ import {
   LOGOUT,
   LOAD_USER,
   ACCOUNT_DELETE,
+  GOOGLE_LOGIN_SUCCESS,
+  GOOGLE_LOGIN_FAIL,
 } from '../action/types';
 
 const initialState = {
@@ -41,6 +43,13 @@ function authReducer(state = initialState, action) {
         isAuthenticated: true,
         loading: false,
       };
+    case GOOGLE_LOGIN_SUCCESS:
+      return {
+        ...state,
+        user: payload,
+        isAuthenticated: true,
+        loading: false,
+      };
     case ACCOUNT_DELETE:
       return {
         ...state,
@@ -49,16 +58,23 @@ function authReducer(state = initialState, action) {
         loading: false,
         error: null,
       };
-    case AUTH_ERROR:
     case REGISTER_FAIL:
     case LOGIN_FAIL:
-    case LOGOUT:
+    case GOOGLE_LOGIN_FAIL:
       return {
         ...state,
         isAuthenticated: false,
         loading: false,
         user: null,
         error: payload,
+      };
+    case AUTH_ERROR:
+    case LOGOUT:
+      return {
+        ...state,
+        isAuthenticated: false,
+        loading: false,
+        user: null,
       };
 
     default:

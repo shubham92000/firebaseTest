@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { register } from '../action/auth';
+import { register, googleLogin } from '../action/auth';
 import Loading from './Loading';
 
 const Register = (props) => {
@@ -27,6 +27,12 @@ const Register = (props) => {
       email: '',
       password: '',
     });
+  };
+
+  const onClickGoogle = (e) => {
+    e.preventDefault();
+    // dispatch(googleLogin());
+    console.log('on click google');
   };
 
   if (loading) {
@@ -71,6 +77,8 @@ const Register = (props) => {
           className="btn btn-primary btn-block"
         />
       </form>
+
+      <button onClick={onClickGoogle}>Sign In with Google</button>
 
       <p className="my-1">
         Have an account? <Link to="/login">Login</Link>
