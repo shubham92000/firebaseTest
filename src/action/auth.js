@@ -122,11 +122,9 @@ export const googleLogin = () => async (dispatch) => {
   signInWithPopup(auth, provider)
     .then((result) => {
       // This gives you a Google Access Token. You can use it to access the Google API.
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-      // The signed-in user info.
+      // const credential = GoogleAuthProvider.credentialFromResult(result);
+      // const token = credential.accessToken; // oauth access token
       const user = result.user;
-      console.log(token, user, result);
       dispatch({
         type: GOOGLE_LOGIN_SUCCESS,
         payload: user,
