@@ -24,7 +24,7 @@ import {
   GOOGLE_LOGIN_FAIL,
 } from './types';
 
-export const loading = () => async (dispatch) => {
+export const loading = () => (dispatch) => {
   dispatch({
     type: LOAD_USER,
   });
@@ -126,22 +126,17 @@ export const googleLogin = () => async (dispatch) => {
       const token = credential.accessToken;
       // The signed-in user info.
       const user = result.user;
-      console.log(token, user);
+      console.log(token, user, result);
       dispatch({
         type: GOOGLE_LOGIN_SUCCESS,
         payload: user,
       });
     })
     .catch((error) => {
-      // Handle Errors here.
       const errorCode = error.code;
       const errorMessage = error.message;
-      // The email of the user's account used.
       const email = error.email;
-      // The AuthCredential type that was used.
       const credential = GoogleAuthProvider.credentialFromError(error);
-
-      console.log(errorCode, errorMessage, email, credential);
       dispatch({
         type: GOOGLE_LOGIN_FAIL,
         payload: {

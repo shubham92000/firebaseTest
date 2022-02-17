@@ -31,8 +31,7 @@ const Register = (props) => {
 
   const onClickGoogle = (e) => {
     e.preventDefault();
-    // dispatch(googleLogin());
-    console.log('on click google');
+    dispatch(googleLogin());
   };
 
   if (loading) {

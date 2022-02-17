@@ -37,12 +37,6 @@ function authReducer(state = initialState, action) {
       };
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
-      return {
-        ...state,
-        user: payload,
-        isAuthenticated: true,
-        loading: false,
-      };
     case GOOGLE_LOGIN_SUCCESS:
       return {
         ...state,
@@ -75,6 +69,7 @@ function authReducer(state = initialState, action) {
         isAuthenticated: false,
         loading: false,
         user: null,
+        error: null,
       };
 
     default:
